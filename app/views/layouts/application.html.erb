@@ -1,14 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Blog</title>
-  <%= stylesheet_link_tag :all %>
+  <title><%= page_title("李骥平博客之\"RoR相关技术\"") %></title>
+  <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag :defaults %>
+  <%=yield :head%>
   <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag  'coderay' %>
+  <%= raw(include_yui_editor_if_used) %>
+
 </head>
 <body>
 
-<%= yield %>
+  <div id="wrap">
+    <div id="blog_banner">
+      <div id="menu">
+        <%= link_to "Blog", posts_path %>
+        |
+        <a title="elite.ljp's other page" href="#">Home</a>
+      </div>
+      <div id="identity">
+        <h1><a class="homelink1" href=""><%=page_title("Starting with Rails3...")%></a></h1>
+        <h2><a class="homelink2" href="#">Ruby on Rails</a></h2>
+      </div>
+    </div>
+    <div id="mainpane">
+      <div id="rightcolumn">
+        <div id="contenttop"><br/></div>
+        <div id="content">
+            <%= yield %>
+        </div>
+      </div>
+      <div id="leftSideBar">
+        <div id="sidebartop"><br/></div>
+
+        <div id="sidebarmiddle">
+          <div>
+            <h3 class="SideBarTitle">QuickSearch</h3>
+            <div class="SideBarContent">
+              
+            </div>
+          </div>
+          <div>
+            <h3 class="SideBarTitle">Categories</h3>
+            <div class="SideBarContent">
+              <ul id="categories_list">
+                <%categories.each do |category|%>
+                  <li class="cl" style="display: block;"> <%=link_to "#{category.name}(#{category.posts.length})"%></li>
+                <%end%>
+
+
+              </ul>
+            </div>
+          </div>
+          <div>
+            <h3 class="SideBarTitle">Statistics</h3>
+            <div class="SideBarContent">
+              32 posts,88 conments,102 replies
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="footer"></div>
+      
+    </div>
+  </div>
+    
 
 </body>
 </html>
