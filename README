@@ -14,7 +14,8 @@
             4.已实现模型字段以及相互关系的定义
             5.基本功能已经实现：
                 ＃网站的整体布局，以及css框架的确定
-                ＃发表文章，选择文章分类，文章的富文本编辑（plugin:YUI_editor）,ruby代码语法高亮（gems:coderay,RedCloth）
+                ＃发表文章，选择文章分类，文章的富文本编辑（plugin:YUI_editor）,
+                    ruby代码语法高亮（gems:coderay,RedCloth）
                 ＃实现文章评论功能
               未实现功能：
                 *未实现评论的reply功能（预计对comment使用自关联设计，实现一对多功能）
