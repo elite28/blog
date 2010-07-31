@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<div class="entry">
+  <h4 class="post_title"><%= @post.title%> </h4>
+  <div class="entryFooter">
+
+            <%=@post.created_at%><br/>
+    		类别:<%=@post.category.name%>
+             <br/><%=link_to "Comments(#{@post.comments.length})" ,:anchor=>"comments"%>
+             
+
+  </div>
+  <div class="entry_body">
+    <%= raw(coderay(@post.content)) %>
+  </div>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+</div>
+
+
+<div class="comments">
+  <a id="comments"></a>
+  <br/>
+  <div class="commentsTitle">文章评论</div>
+  <br/>
+  <%i=1%>
+  <%@post.comments.each do |comment|%>
+  <%="#{i}楼"%>
+  <div class="comment comment_author_kleinerChemiker  comment_evenbox"><%= comment.name_display %>说：<%=comment.content%></div>
+  <%= link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete %>
+  <br/>
+  <% i=i+1 %>
+  <%end%>
+
+  <div class="commentform">
+    <div class="commentsTitle">发表评论</div>
+    <%= form_for(@comment) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<dl>
+  <%=hidden_field_tag "comment[post_id]","#{@post.id}" %>
+    	<dt class="serendipity_commentsLabel"><%= f.label :昵称 %></dt>
+    		<dd class="commentsValue"><%= f.text_field :name, :size=>30, :class=>"frm"%></dd>
+    	<dt class="serendipity_commentsLabel"><%= f.label :联系方式 %></dt>
+    		<dd class="commentsValue"><%= f.text_field :contact, :size=>30, :class=>"frm"%></dd>
+
+    	<dt class="serendipity_commentsLabel"><%= f.label :内容 %></dt>
+    		<dd class="serendipity_commentsValue"> <%= f.text_area :content,:cols=>"40", :rows=>"10" ,:class=>"frm"%> </dd><br/>
+
+    </dl>
+      <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+    
+    
+</div>
+  </div>

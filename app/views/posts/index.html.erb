@@ -1,0 +1,26 @@
+<% @posts.each do |post| %>
+<div class="entry">
+  <h4 class="post_title"><%= link_to "#{post.title}", post %> </h4>
+  <div class="entryFooter">
+           
+            <%=post.created_at%><br/>
+    		类别:<%=post.category.name%>
+<br/><%=link_to "Comments(#{post.comments.length})",post %>
+                                              			        
+  </div>
+  <div class="entry_body">
+    <%= raw(coderay(post.content)) %>
+  </div>
+  <div class="button">
+     <%= link_to 'Edit', edit_post_path(post) %>
+
+    <%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %>
+
+  </div>
+</div>
+<%end%>
+<%= link_to 'New Post', new_post_path %>
+
+
+
+
