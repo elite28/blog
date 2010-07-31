@@ -15,4 +15,12 @@ module ApplicationHelper
   def categories
     Category.find(:all)
   end
+
+  def posts_num
+    Post.find(:all).length
+  end
+
+  def comments_num
+    Comment.find(:all).length
+  end
 end
